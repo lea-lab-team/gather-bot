@@ -1,1 +1,1 @@
-# GatherEntranceExitManagement
+# レアラボ Gather Bot
