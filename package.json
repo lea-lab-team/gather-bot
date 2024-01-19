@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "node -r ts-node/register src/index.ts"
+    "dev": "node -r ts-node/register src/index.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^20.11.5",
