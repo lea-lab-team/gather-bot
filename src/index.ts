@@ -19,8 +19,29 @@ gather.connect();
 gather.subscribeToConnection((connected) => {
   console.log({ connected });
 
-  gather.subscribeToEvent('playerMoves', async (data, context) => {
+  gather.subscribeToEvent('playerJoins', async (_, { playerId }) => {
+    try {
+     setTimeout(() => {
+      const _player = gather.getPlayer(playerId!)
+      discordDomain.notify(DISCORD_WEBHOOK_URL, `「${_player!.name}」さんが入室しました`).catch((err) => {
+        console.log({ type: 'error', message: err.message })
+      })
+     }, 3000)
 
-    await discordDomain.notify(DISCORD_WEBHOOK_URL, `Player ${context.player?.name} moved to ${context.player?.x}, ${context.player?.y}`)
+    } catch (err: any) {
+      console.log({ type: 'error', message: err.message })
+    }
+
+    console.info({ event: 'join', playerId })
+  })
+
+  gather.subscribeToEvent('playerExits', async (_, { player, playerId }) => {
+    try {
+      await discordDomain.notify(DISCORD_WEBHOOK_URL, `「${player!.name}」さんが退出しました`)
+    } catch (err: any) {
+      console.log({ type: 'error', message: err.message })
+    }
+
+    console.info({ event: 'exit', playerId })
   })
 });
