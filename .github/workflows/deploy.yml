@@ -29,11 +29,11 @@ jobs:
           node-version: lts/*
 
       - name: Build step
-        run: "npm install && npm run build" # 📝 Update the build command(s) if necessary
+        run: "npm install && npm run build && ls" # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "busy-sheep-52"
-          entrypoint: "dist/index.js" # 📝 Update the entrypoint if necessary
+          entrypoint: "index.js" # 📝 Update the entrypoint if necessary
           root: "." # 📝 Update the root if necessary
