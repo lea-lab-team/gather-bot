@@ -9,6 +9,8 @@ const GATHER_API_KEY = process.env.GATHER_API_KEY || "";
 const GATHER_SPACE_ID = process.env.GATHER_SPACE_ID || "";
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || "";
 
+let initFlag = false
+
 class DiscordDomain {
   constructor() {}
 
@@ -35,6 +37,12 @@ gather.subscribeToConnection((connected) => {
   console.log({ connected });
 
   gather.subscribeToEvent('playerJoins', async (_, { playerId }) => {
+    if (!initFlag) {
+      initFlag = true
+      return
+    }
+
+
     try {
      setTimeout(() => {
       const _player = gather.getPlayer(playerId!)
@@ -51,6 +59,11 @@ gather.subscribeToConnection((connected) => {
   })
 
   gather.subscribeToEvent('playerExits', async (_, { player, playerId }) => {
+    if (!initFlag) {
+      initFlag = true
+      return
+    }
+
     try {
       await discordDomain.notify(DISCORD_WEBHOOK_URL, `「${player!.name}」さんが退出しました`)
     } catch (err: any) {
