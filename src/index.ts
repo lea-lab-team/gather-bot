@@ -1,13 +1,28 @@
 import 'dotenv/config'
 
+import axios from 'axios';
 import { Game } from "@gathertown/gather-game-client";
-import { DiscordDomain } from './domains/discord.domain';
 
 global.WebSocket = require("isomorphic-ws");
 
 const GATHER_API_KEY = process.env.GATHER_API_KEY || "";
 const GATHER_SPACE_ID = process.env.GATHER_SPACE_ID || "";
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || "";
+
+class DiscordDomain {
+  constructor() {}
+
+  async notify(webhookUrl: string, message: string) {
+    try {
+      await axios.post(webhookUrl, {
+        content: message
+      })
+    } catch (err) {
+      console.error(err)
+      throw Error('Error sending message to Discord')
+    }
+  }
+}
 
 const discordDomain = new DiscordDomain()
 
