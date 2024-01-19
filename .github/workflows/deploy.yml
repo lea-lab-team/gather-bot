@@ -35,5 +35,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "busy-sheep-52"
-          entrypoint: "dist/index.js" # 📝 Update the entrypoint if necessary
-          root: ".." # 📝 Update the root if necessary
+          entrypoint: "index.js" # 📝 Update the entrypoint if necessary
+          root: "." # 📝 Update the root if necessary

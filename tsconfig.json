@@ -4,7 +4,7 @@
     "module": "commonjs",
     "noEmit": false,
     "strict": true,
-    "outDir": "./dist/",
+    "outDir": "./src/",
     "sourceMap": true,
     "skipLibCheck": true
   },
