@@ -36,4 +36,4 @@ jobs:
         with:
           project: "busy-sheep-52"
           entrypoint: "dist/index.js" # 📝 Update the entrypoint if necessary
-          root: "." # 📝 Update the root if necessary
+          root: ".." # 📝 Update the root if necessary
