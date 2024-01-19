@@ -59,11 +59,6 @@ gather.subscribeToConnection((connected) => {
   })
 
   gather.subscribeToEvent('playerExits', async (_, { player, playerId }) => {
-    if (!initFlag) {
-      initFlag = true
-      return
-    }
-
     try {
       await discordDomain.notify(DISCORD_WEBHOOK_URL, `「${player!.name}」さんが退出しました`)
     } catch (err: any) {
